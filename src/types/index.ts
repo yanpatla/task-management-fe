@@ -31,8 +31,20 @@ export const userSchema = authSchema
     _id: z.string(),
   });
 
-export type User = z.infer<typeof userSchema>;  
+export type User = z.infer<typeof userSchema>;
 
+/** Notes */
+
+export const noteSchema = z.object({
+  _id: z.string(),
+  content: z.string(),
+  createdBy: userSchema,
+  task: z.string(),
+  createdAt: z.string(),
+});
+
+export type Note = z.infer<typeof noteSchema>;
+export type NoteFormData = Pick<Note, "content">;
 /** Tasks */
 export const taskStatusSchema = z.enum([
   "pending",
@@ -48,6 +60,14 @@ export const taskSchema = z.object({
   description: z.string(),
   project: z.string(),
   status: taskStatusSchema,
+  completedBy: z.array(
+    z.object({
+      _id: z.string(),
+      user: userSchema,
+      status: taskStatusSchema,
+    }),
+  ),
+  notes: z.array(noteSchema),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -63,6 +83,7 @@ export const projectSchema = z.object({
   projectName: z.string(),
   clientName: z.string(),
   description: z.string(),
+  manager: z.string(),
 });
 
 export const dashBoardProjectSchema = z.array(
@@ -71,6 +92,7 @@ export const dashBoardProjectSchema = z.array(
     projectName: true,
     clientName: true,
     description: true,
+    manager: true,
   }),
 );
 export type Project = z.infer<typeof projectSchema>;
@@ -78,3 +100,15 @@ export type ProjecFormData = Pick<
   Project,
   "clientName" | "projectName" | "description"
 >;
+
+/** Team */
+export const teamMemberSchema = userSchema.pick({
+  name: true,
+  email: true,
+  _id: true,
+});
+
+export const teamMembersSchema = z.array(teamMemberSchema);
+
+export type TeamMember = z.infer<typeof teamMemberSchema>;
+export type TeamMemberForm = Pick<TeamMember, "email">;

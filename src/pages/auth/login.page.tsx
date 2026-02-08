@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import type { UserLoginForm } from "../types";
+import type { UserLoginForm } from "../../types";
 import ErrorMessage from "@/components/ErrorMessage";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";

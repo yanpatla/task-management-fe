@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input";
 import { useState } from "react";
-import type { ConfirmToken } from "../types";
+import type { ConfirmToken } from "../../types";
 import { useMutation } from "@tanstack/react-query";
 import { confirmAccount } from "@/api/auth.api";
 import { toast } from "react-toastify";

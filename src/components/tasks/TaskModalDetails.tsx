@@ -13,6 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Fragment, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import NotesPanel from "../notes/NotePanel";
 
 export default function TaskModalDetails() {
   const params = useParams();
@@ -36,8 +37,8 @@ export default function TaskModalDetails() {
       toast.error(error.message);
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({queryKey:["project"]})
-      queryClient.invalidateQueries({queryKey:["task"]})
+      queryClient.invalidateQueries({ queryKey: ["project"] });
+      queryClient.invalidateQueries({ queryKey: ["task"] });
       toast.success(data);
     },
   });
@@ -53,7 +54,7 @@ export default function TaskModalDetails() {
   useEffect(() => {
     if (!isError) return;
     const msg =
-      error instanceof Error ? error.message : "Couldn't load the  task";
+      error instanceof Error ? error.message : "Couldn't load the task";
     toast.error(msg, { toastId: "task-load-error" });
     navigate(location.pathname, { replace: true });
   }, [isError, error, navigate, location.pathname]);
@@ -108,6 +109,23 @@ export default function TaskModalDetails() {
                     <p className="text-lg text-slate-500 mb-2">
                       Description: {data.description}
                     </p>
+                    {data.completedBy.length ? (
+                      <>
+                        <p className="font-bold text-2xl text-slate-600 my-5">
+                          History:
+                        </p>
+                        <ul className="list-decimal">
+                          {data.completedBy.map((activityLog) => (
+                            <li key={activityLog._id}>
+                              <span className="font-bold text-slate-600">
+                                {statusTranslations[activityLog.status]}
+                              </span>{" "}
+                              By: {activityLog.user.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : null}
                     <div className="my-5 space-y-3">
                       <label className="font-bold">
                         Actual State: {data.status}
@@ -126,6 +144,7 @@ export default function TaskModalDetails() {
                         )}
                       </select>
                     </div>
+                    <NotesPanel notes={data.notes} />
                   </DialogPanel>
                 </TransitionChild>
               </div>

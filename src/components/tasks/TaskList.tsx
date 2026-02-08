@@ -5,8 +5,8 @@ import { statusTranslations } from "@/locales/en";
 
 type TaskListProps = {
   tasks: Task[];
+  canEdit: boolean;
 };
-
 
 const statusStyles: Record<TaskStatus, string> = {
   pending: "border-t-slate-500",
@@ -15,7 +15,7 @@ const statusStyles: Record<TaskStatus, string> = {
   underReview: "border-t-amber-500",
   completed: "border-t-emerald-500",
 };
-export default function TaskList({ tasks }: TaskListProps) {
+export default function TaskList({ tasks , canEdit}: TaskListProps) {
   const groupedTasks = groupTasksByStatus(tasks);
 
   return (
@@ -36,7 +36,7 @@ export default function TaskList({ tasks }: TaskListProps) {
                   There are no Task
                 </li>
               ) : (
-                task.map((task) => <TaskCard key={task._id} task={task} />)
+                task.map((task) => <TaskCard key={task._id} task={task}  canEdit={canEdit}/>)
               )}
             </ul>
           </div>

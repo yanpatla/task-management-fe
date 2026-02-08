@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import ErrorMessage from "@/components/ErrorMessage";
-import type { UserRegisterForm } from "../types";
+import type { UserRegisterForm } from "../../types";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { createAccount } from "@/api/auth.api";

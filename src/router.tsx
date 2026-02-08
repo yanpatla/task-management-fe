@@ -1,16 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "@/layouts/AppLayout";
 import DashboardPage from "@/pages/dashboard.page";
-import CreateProjectsPage from "@/pages/create-projects.page";
-import EditPorjectPage from "@/pages/edit-project.page";
-import DetailsProjectPage from "@/pages/details-project.page";
+import CreateProjectsPage from "@/pages/projects/create-projects.page";
+import EditPorjectPage from "@/pages/projects/edit-project.page";
+import DetailsProjectPage from "@/pages/projects/details-project.page";
 import AuthLayout from "./layouts/AuthLayout";
-import LoginPage from "@/pages/login.page";
-import RegisterPage from "@/pages/register.page";
-import ConfirmAccountPage from "@/pages/confirm-account.page";
-import RequestNewCodePage from "@/pages/request-new-code.page";
-import ForgotPasswordPage from "@/pages/forgot-password.page";
-import NewPasswordPage from "@/pages/new-password.page";
+import LoginPage from "@/pages/auth/login.page";
+import RegisterPage from "@/pages/auth/register.page";
+import ConfirmAccountPage from "@/pages/auth/confirm-account.page";
+import RequestNewCodePage from "@/pages/auth/request-new-code.page";
+import ForgotPasswordPage from "@/pages/auth/forgot-password.page";
+import NewPasswordPage from "@/pages/auth/new-password.page";
+import ProjectTeamPage from "./pages/projects/projects-team.page";
 
 export default function Router() {
   return (
@@ -23,6 +24,10 @@ export default function Router() {
           <Route
             path="/projects/:projectId/edit"
             element={<EditPorjectPage />}
+          />
+          <Route
+            path="/projects/:projectId/team"
+            element={<ProjectTeamPage />}
           />
         </Route>
 
