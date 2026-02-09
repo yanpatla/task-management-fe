@@ -1,8 +1,8 @@
-import type { Task, TaskStatus } from "../types";
+import type { TaskProject, TaskStatus } from "../types";
 
-type GroupTask = Record<TaskStatus, Task[]>;
+type GroupTask = Record<TaskStatus, TaskProject[]>;
 
-export function groupTasksByStatus(tasks: Task[]): GroupTask {
+export function groupTasksByStatus(tasks: TaskProject[]): GroupTask {
   const groups: GroupTask = {
     pending: [],
     onHold: [],

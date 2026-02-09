@@ -1,8 +1,6 @@
-import React from "react";
-import AddNoteForm from "./AddNoteForm";
 import type { Task } from "@/types/index";
-import NoteDetail from "./Notedetail";
-
+import AddNoteForm from "./AddNoteForm";
+import NoteDetail from "./NoteDetail";
 type NotesPanelProps = {
   notes: Task["notes"];
 };

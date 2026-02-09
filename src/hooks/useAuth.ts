@@ -10,3 +10,4 @@ export const useAuth = () => {
   });
   return {data, isError, isLoading};
 };
+ 

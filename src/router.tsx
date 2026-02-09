@@ -12,6 +12,10 @@ import RequestNewCodePage from "@/pages/auth/request-new-code.page";
 import ForgotPasswordPage from "@/pages/auth/forgot-password.page";
 import NewPasswordPage from "@/pages/auth/new-password.page";
 import ProjectTeamPage from "./pages/projects/projects-team.page";
+import ProfilePage from "./pages/profile/profile.page";
+import ChangePasswordPage from "./pages/profile/change-password.page";
+import ProfileLayout from "./layouts/ProfileLayout";
+import NotFoundPage from "./pages/404/not-found.page";
 
 export default function Router() {
   return (
@@ -29,6 +33,10 @@ export default function Router() {
             path="/projects/:projectId/team"
             element={<ProjectTeamPage />}
           />
+          <Route element={<ProfileLayout />}>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/password" element={<ChangePasswordPage />} />
+          </Route>
         </Route>
 
         <Route element={<AuthLayout />}>
@@ -47,6 +55,10 @@ export default function Router() {
             element={<ForgotPasswordPage />}
           />
           <Route path="/auth/new-password" element={<NewPasswordPage />} />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

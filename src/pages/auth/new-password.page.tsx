@@ -1,6 +1,6 @@
 import NewPasswordForm from "@/components/auth/NewPasswordForm";
 import NewPasswordToken from "@/components/auth/NewPasswordToken";
-import React, { useState } from "react";
+import { useState } from "react";
 import type { ConfirmToken } from "../../types";
 
 export default function NewPasswordPage() {
